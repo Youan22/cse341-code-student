@@ -1,9 +1,36 @@
-const routes = require('express').Router();
-const temples = require('../controllers/temple.js');
+const routes = require("express").Router();
+const temples = require("../controllers/temple.js");
 
-routes.get('/', temples.findAll);
-routes.get('/:temple_id', temples.findOne);
+/**
+ * @swagger
+ * /temples:
+ *   get:
+ *     summary: Get a list of temples
+ *     description: Retrieve a list of temples from the database.
+ *     responses:
+ *       200:
+ *         description: Successful response with a list of temples.
+ */
+routes.get("/", temples.findAll);
 
-routes.post('/', temples.create);
+/**
+ * @swagger
+ * /temples/{temple_id}:
+ *   get:
+ *     summary: Get a temple by the temple_id
+ *     parameters:
+ *       - in: path
+ *         name: temple_id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successful response with a temple.
+ */
+
+routes.get("/:temple_id", temples.findOne);
+
+routes.post("/", temples.create);
 
 module.exports = routes;
